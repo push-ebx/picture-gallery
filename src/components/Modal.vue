@@ -9,19 +9,16 @@ export default {
 
 <template>
   <Transition name="modal">
-    <div v-if="show" class="modal-mask">
+    <div v-if="show" @click="$emit('close')" class="modal-mask">
       <div class="modal-wrapper">
-        <div class="modal-container">
+        <div class="modal-container" @click.stop>
           <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <img src="/assets/painting1.png" class="d-block w-100" alt="...">
+                <img :src="painting.path" class="d-block w-100">
               </div>
-              <div class="carousel-item">
-                <img src="/assets/painting2.png" class="d-block w-100" alt="...">
-              </div>
-              <div class="carousel-item">
-                <img src="/assets/painting3.png" class="d-block w-100" alt="...">
+              <div class="carousel-item" v-for="path in painting.pics">
+                <img :src="path" class="d-block w-100">
               </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -117,6 +114,7 @@ export default {
 
 .describe p {
   margin-top: 10px;
+  text-align: justify;
 }
 
 .title_author {
